@@ -1,10 +1,13 @@
-/* eslint-disable no-unused-vars */
-import axios from "axios";
-export const axiosInstance = axios.create({
-    baseURL: 'https://api.binsapp.ai/'
+import axios from 'axios';
+
+export const axiosInstanceStudent = axios.create({
+    baseURL: 'https://ultra-backend-v50e.onrender.com/',
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
-axiosInstance.interceptors.request.use(
+axiosInstanceStudent.interceptors.request.use(
     (config) => {
         const token = window.localStorage.getItem('accessToken');
         console.log('Token retrieved from localStorage:', token);
@@ -12,16 +15,13 @@ axiosInstance.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = 'Bearer ' + token;
         }
-
         return config;
     },
     (error) => {
         return Promise.reject(error);
     }
 );
-
-
-axiosInstance.interceptors.response.use(
+axiosInstanceStudent.interceptors.response.use(
     (response) => {
         return response;
     },
@@ -30,3 +30,4 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+export default axiosInstanceStudent;

@@ -1,34 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../authRoutes/useAuth";
 import {
-  bin,
-  customerdark,
-  customerlight,
+  coursedark,
+  courselight,
   dashboard3,
   dashboarddark,
-  dumpsterdark,
-  dumpsterlight,
-  OrderIcon,
-  OrderIconW,
-  parentdark,
-  parentlight,
-  recyclebin,
+  student,
   user4,
   userdark
 } from "../icons/icon";
-import axiosInstance, { headers } from "./ApiFunction/axiosInstance";
-import { useAuth } from "../authRoutes/useAuth";
-import { useSelector } from "react-redux";
-
 const SidebarMenu = ({ children, setToggled, toggled, setBroken }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const binCounts = useSelector((state) => state.binStatus.binCounts);
   const [selectedLink, setSelectedLink] = useState("0");
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const [dustbinCount, setDustbinCount] = useState([]);
   const location = useLocation();
   const isLogin = useAuth();
 
@@ -44,150 +33,28 @@ const SidebarMenu = ({ children, setToggled, toggled, setBroken }) => {
   };
 
 
-  const fetchData = async () => {
-    try {
-      const res = await axiosInstance.get(`api/bin/admin/check-bin`, {
-        headers,
-      });
-      if (res?.data) {
-        setDustbinCount(res?.data);
-      }
-    } catch (error) {
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const menuItems = [
     {
       image: dashboard3,
       image2: dashboarddark,
-      items: "Dashboard",
+      items: "Home",
       path: "/dashboard",
-    },
-    // {
-    //   image: categoryIcon,
-    //   image2: categoryIconW,
-    //   items: "Category",
-    //   path: "/category",
-    // },
-    // {
-    //   image: quizdark,
-    //   image2: quizlight,
-    //   items: "Services",
-    //   path: "/services",
-    // },
-    {
-      image: parentlight,
-      image2: parentdark,
-      items: "Renters",
-      path: "/renters",
-    },
-    {
-      items: "Bins",
-      image: dumpsterlight,
-      image2: bin,
-      badge: binCounts?.pending > 0 ? binCounts?.pending : null,
-      subItems: [
-        {
-          label: "Pending",
-          path: "/pending-bin",
-          badge: binCounts?.pending > 0 ? binCounts?.pending : null
-        },
-        {
-          label: "Approved",
-          path: "/approved-bin",
-          // badge: binCounts?.verify > 0 ? binCounts?.verify : null
-        },
-        {
-          label: "Rejected",
-          path: "/rejected-bin",
-          // badge: binCounts?.reject > 0 ? binCounts?.reject : null
-        },
-      ],
     },
     {
       image: user4,
       image2: userdark,
-      items: "Rentees",
-      path: "/rentees",
+      items: "Students",
+      path: "/students",
     },
     {
-      items: "Dumpster",
-      image: dumpsterlight,
-      image2: dumpsterdark,
-      subItems: [
-        {
-          label: "Create Dumpster",
-          path: "/add-dumpster",
-        },
-        {
-          label: "Dumpster List",
-          path: "/dumpster-list",
-        },
-      ],
+      image: courselight,
+      image2: coursedark,
+      items: "Courses",
+      path: "/courses",
     },
-    {
-      image: OrderIconW,
-      image2: OrderIcon,
-      items: "All Orders",
-      path: "/all-orders",
-    },
-    {
-      image: customerlight,
-      image2: customerdark,
-      items: "Support",
-      path: "/support",
-      badge: binCounts?.totalPendingSupports > 0 ? binCounts?.totalPendingSupports : null
-    },
-    // {
-    //   image: employeeIcon,
-    //   image2: employeWIconW,
-    //   items: "Service Providers",
-    //   path: "/service-providers",
-    // },
-    // {
-    //   image: historyIcon,
-    //   image2: historyWIconW,
-    //   items: "Estimates",
-    //   path: "/estimates",
-    // },
-    // {
-    //   image: parentdark,
-    //   image2: parentlight,
-    //   items: "Sub-Admins",
-    //   path: "/sub-admins",
-    // },
-    // {
-    //   image: AmenitiesIcon,
-    //   image2: AmenitiesIconW,
-    //   items: "Facilities",
-    //   path: "/facilities",
-    // },
-    // {
-    //   image: categoryIcon,
-    //   image2: categoryIconW,
-    //   items: "Sub category",
-    //   path: "/sub-category",
-    // },
 
-    // {
-    //   image: creditIcon,
-    //   image2: creditWIconW,
-    //   items: "Referal & Credits",
-    //   path: "/referal",
-    // },
-    // {
-    //   image: eventIcon,
-    //   image2: eventWIconW,
-    //   items: "Reports",
-    //   path: "/reports",
-    // },
-    // { image: parentdark, image2: parentlight, items: "Help", path: '/help-support' },
-    // { image: parentdark, image2: parentlight, items: "FAQs", path: '/faq' },
-    // { image: parentdark, image2: parentlight, items: "All Orders", path: '/all-orders' },
+
   ];
 
   return (
@@ -227,8 +94,8 @@ const SidebarMenu = ({ children, setToggled, toggled, setBroken }) => {
                   >
                     <img
                       style={{ height: "5rem", width: "auto" }}
-                      src={recyclebin}
-                      className=""
+                      src={student}
+                      className="rounded-full"
                       alt=""
                     />
                   </button>

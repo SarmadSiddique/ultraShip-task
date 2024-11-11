@@ -41,16 +41,15 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
                 <MdMenu size={28} />
               </button>
             )}
-            <h3 className="d-none d-md-block poppins_medium mb-0 text_dark">Dashboard</h3>
+            {/* <h3 className="d-none d-md-block poppins_medium mb-0 text_dark"></h3> */}
           </div>
           <Nav className="ms-auto flex">
             <div className="flex justify-center items-center">
               <Menu as="div" className="relative">
                 <Menu.Button className="relative flex items-center me-3 no-underline gap-2">
-                  <img src={admindata?.profilePicture || avatar1} style={{ height: '40px', width: '40px', objectFit: 'cover', borderRadius: '12px' }} alt="" />
+                  <img className="rounded-full" src={admindata?.profilePicture || avatar1} width="40px" alt="" />
                   <div className="d-flex flex-column align-items-start justify-content-start me-4">
-                    <span style={{ fontSize: '14px' }} className="text_dark plusJakara_medium">{admindata?.name || 'Not found'}</span>
-                    <span style={{ fontSize: '12px' }} className="text_secondary plusJakara_medium">Admin</span>
+                    <span style={{ fontSize: '12px' }} className="text_secondary plusJakara_medium">User</span>
                   </div>
                   <IoIosArrowDown style={{ color: '#000' }} />
                 </Menu.Button>

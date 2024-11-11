@@ -1,33 +1,21 @@
 /* eslint-disable no-unused-vars */
-import { Fragment, useState, forwardRef } from "react";
-import ReactPaginate from "react-paginate";
+import { CircularProgress } from "@mui/material";
+import { Fragment, useState } from "react";
 import DataTable from "react-data-table-component";
 import {
-  ChevronDown,
-  FileText,
-  MoreVertical,
-  Edit2,
-  Trash,
+  ChevronDown
 } from "react-feather";
+import ReactPaginate from "react-paginate";
 import {
-  Row,
-  Col,
   Card,
-  Input,
-  Label,
-  CardTitle,
-  CardHeader,
-  Spinner,
+  Input
 } from "reactstrap";
 import {
   arrowleft2,
   arrowright2,
   filter,
-  searchbar,
-  searchnormal,
+  searchnormal
 } from "../icons/icon";
-import { MdSearch } from "react-icons/md";
-import { CircularProgress } from "@mui/material";
 
 // const BootstrapCheckbox = forwardRef((props, ref) => (
 //     <div className='form-check'>
@@ -35,7 +23,7 @@ import { CircularProgress } from "@mui/material";
 //     </div>
 // ))
 
-const ProductTable = ({
+const AppTable = ({
   data,
   columns,
   currentPage,
@@ -203,7 +191,7 @@ const ProductTable = ({
                 paginationDefaultPage={currentPage + 1}
                 paginationComponent={CustomPagination}
                 data={searchValue.length ? filteredData : data}
-                // selectableRowsComponent={BootstrapCheckbox}
+              // selectableRowsComponent={BootstrapCheckbox}
               />
             </div>
           )}
@@ -213,4 +201,4 @@ const ProductTable = ({
   );
 };
 
-export default ProductTable;
+export default AppTable;

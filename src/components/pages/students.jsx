@@ -6,12 +6,12 @@ import { message, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { StyleSheetManager } from "styled-components";
-import ProductTable from "../DataTable/productTable";
+import AppTable from "../DataTable/appTable";
 import { allUsers, getAdminRating, updateUser } from "../api/customer";
 import { avatar1 } from "../icons/icon";
 import StarRatings from "react-star-ratings";
-
-const Rentees = () => {
+import axiosInstanceStudent from "../../utils/axiosInstanceStudent";
+const Students = () => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [statusId, setStatusId] = useState("");
@@ -27,7 +27,8 @@ const Rentees = () => {
   const [selectedRatingData, setselectedRatingData] = useState(null)
   const [count, setcount] = useState(0);
   const [ratingData, setratingData] = useState([])
-  const [categories, setCategories] = useState([]);
+
+  const [students, setStudents] = useState();
 
   const handleShowRating = async (row, loadMore = false) => {
     if (loadMore === true) {
@@ -80,7 +81,7 @@ const Rentees = () => {
         return (
           <div className="flex justify-start items-center gap-1" style={{ maxWidth: '100px', width: '100%' }}>
             <img src={row?.profilePicture || avatar1} onClick={() => handleImageClick(row?.profilePicture || avatar1)} className="cursor-pointer" style={{ width: '35px', height: '35px', objectFit: 'cover', borderRadius: '50%' }} alt="" />
-            <span className="text_dark inter_medium">{row?.name}</span>
+            <span className="text_dark inter_medium text-nowrap">{row?.name}</span>
           </div>)
       }
     },
@@ -99,6 +100,15 @@ const Rentees = () => {
       maxWidth: "200px",
     },
     {
+      name: "Class",
+      sortable: true,
+      minWidth: "100px",
+      maxWidth: "200px",
+      cell: (row) => (
+        <span className="text_dark inter_medium">{row?.class}</span>
+      )
+    },
+    {
       name: "Address",
       sortable: true,
       minWidth: "250px",
@@ -107,19 +117,19 @@ const Rentees = () => {
         <span className="text_dark inter_medium">{row?.address}</span>
       )
     },
-    {
-      name: "Total Reviews",
-      sortable: true,
-      cell: (row) => {
-        return (
-          <button onClick={() => handleShowRating(row)} className="flex justify-start items-center gap-1">
-            <FaStar color="#FFBE4C" />
-            <span className="text_dark inter_medium">{row?.total_reviews}</span>
-          </button>)
-      },
-      minWidth: "110px",
-      maxWidth: "200px",
-    },
+    // {
+    //   name: "Total Reviews",
+    //   sortable: true,
+    //   cell: (row) => {
+    //     return (
+    //       <button onClick={() => handleShowRating(row)} className="flex justify-start items-center gap-1">
+    //         <FaStar color="#FFBE4C" />
+    //         <span className="text_dark inter_medium">{row?.total_reviews}</span>
+    //       </button>)
+    //   },
+    //   minWidth: "110px",
+    //   maxWidth: "200px",
+    // },
   ];
 
   const handleUpdate = async (item) => {
@@ -150,24 +160,20 @@ const Rentees = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    try {
-      const res = await allUsers('rentee', lastId)
-      if (res?.data) {
-        setCategories(res?.data?.users);
-        setcount(res?.data?.count?.totalPage);
+    const res = await axiosInstanceStudent.post('/getUser').then((response) => {
+
+      if (response) {
+        setStudents(response?.data?.data);
+        setcount(1);
       }
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      // console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    });
+    setLoading(false); // Ensure loading is stopped in both success and error cases
+
   };
 
   useEffect(() => {
     fetchData();
-  }, [lastId]);
+  }, []);
 
   return (
     <StyleSheetManager
@@ -175,26 +181,26 @@ const Rentees = () => {
     >
       <main className="lg:container p-4 mx-auto" style={{ minHeight: '90vh' }}>
         <div className="flex items-center mb-3 gap-3">
-          <h5 className="plusJakara_semibold text_dark">All Rentees</h5>
+          <h5 className="plusJakara_semibold text_dark">All Students</h5>
         </div>
         {loading ? (
           <main className="my-5 d-flex w-100 justify-content-center align-items-center">
             <CircularProgress size={24} className="text_dark" />
           </main>
-        ) : !categories || categories.length === 0 ? (
+        ) : !students || students.length === 0 ? (
           <main className="my-5 d-flex w-100 justify-content-center align-items-center">
             <span className="text_secondary plusJakara_medium">
               No Data Found
             </span>
           </main>
         ) : (
-          <ProductTable
+          <AppTable
             count={count}
             loading={loading}
             setCurrentPage={setLastId2}
             currentPage={lastId2}
             columns={columns}
-            data={categories}
+            data={students}
             setLastId={setLastId}
           />
         )}
@@ -272,4 +278,4 @@ const Rentees = () => {
   );
 };
 
-export default Rentees;
+export default Students;

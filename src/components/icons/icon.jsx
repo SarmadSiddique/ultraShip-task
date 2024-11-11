@@ -1,6 +1,7 @@
 import logoDynomo from "../assets/svg/logo.svg";
 import techLogin from "../assets/svg/techLoginImage.svg";
 import cat1 from "../assets/png/cat1.png";
+import student from '../assets/png/student.jpg';
 import cat2 from "../assets/png/cat2.png";
 import cat3 from "../assets/png/cat3.png";
 import cat4 from "../assets/png/cat4.png";
@@ -206,6 +207,10 @@ import dashboarddark from '../assets/png/dashboarddark.png'
 import dumpsterlight from '../assets/png/dumpsterlight.png'
 import dumpsterdark from '../assets/png/dumpsterdark.png'
 import bin from '../assets/png/delete.png'
+import assignments from '../assets/png/assignment.png'
+import assignmentsLight from '../assets/png/assignmentsLight.png'
+
+
 
 export {
   dashboard3,
@@ -214,6 +219,8 @@ export {
   dumpsterdark, dumpsterlight,
   avatar3, userdark,
   googlemap,
+  assignments,
+  assignmentsLight,
   faqdark, faqlight, customerdark, customerlight,
   luxurelogolight,
   luxurelogo,
@@ -227,6 +234,7 @@ export {
   employeWIconW,
   AmenitiesIcon,
   AmenitiesIconW,
+  student,
   accomodationIcon,
   accomodationIconW,
   categoryIconW,

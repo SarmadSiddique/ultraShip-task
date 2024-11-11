@@ -1,11 +1,10 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-const StatisticsChart = ({ earningData }) => {
-
-    const formattedData = earningData?.map(item => ({
+const StatisticsChart = ({ graphdata }) => {
+    const formattedData = graphdata?.map(item => ({
         x: item?.x,
-        y: parseFloat(item?.price) || 0,
+        y: parseInt(item?.value) || 0, 
     }));
 
     const options = {
@@ -21,7 +20,7 @@ const StatisticsChart = ({ earningData }) => {
             }
         },
         stroke: {
-            curve: 'straight',
+            curve: 'smooth',
             width: 2,
         },
         markers: {
@@ -38,12 +37,12 @@ const StatisticsChart = ({ earningData }) => {
                 sizeOffset: 3
             }
         },
-        colors: ['#b4b4b4'],
+        colors: ['#1E88E5'], 
         fill: {
             type: 'gradient',
             gradient: {
                 shade: 'light',
-                gradientToColors: ['linear-gradient(180deg, rgba(170, 133, 85, 0.15) 50%, rgba(39, 49, 66, 0.0293652) 88.92%'],
+                gradientToColors: ['#81D4FA'], 
                 opacityFrom: 0.7,
                 opacityTo: 0.5,
                 stops: [0, 100]
@@ -56,6 +55,12 @@ const StatisticsChart = ({ earningData }) => {
                     colors: '#000',
                 },
             },
+            title: {
+                text: 'Time', 
+                style: {
+                    color: '#000'
+                }
+            },
         },
         yaxis: {
             tickAmount: 5,
@@ -66,7 +71,13 @@ const StatisticsChart = ({ earningData }) => {
                 formatter: function (val) {
                     return val;
                 }
-            }
+            },
+            title: {
+                text: 'Count', 
+                style: {
+                    color: '#000'
+                }
+            },
         },
         responsive: [{
             breakpoint: 500,
@@ -89,7 +100,7 @@ const StatisticsChart = ({ earningData }) => {
     return (
         <div className='rounded-4 w-full shadow-sm mt-5 p-4' style={{ backgroundColor: '#FFF6F6' }}>
             <h6 className="text_dark plusJakara_semibold">
-                Earinings
+                Student Statistics
             </h6>
             <div style={{ height: '350px' }}>
                 <Chart options={options} series={seriesArea} type="area" height={350} />

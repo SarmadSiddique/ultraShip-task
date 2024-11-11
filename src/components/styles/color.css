@@ -1,11 +1,11 @@
-:root{
-    --primary: #0EBE3C;
-    --lightprimary: #148633;
-    --darkprimary: #FF8E00;
-    --light: #003F7D14;
-    --secondary: #78828A;
-    --darksecondary: #969696;
-    --dark: #15192C;
-    --black: #000;
-    --white: #FFF;
+:root {
+  --primary: #0f1e30; /* Orange tone from the logo's main color */
+  --lightprimary: #ffae4d; /* Lighter orange for a softer accent */
+  --darkprimary: #e07000; /* Darker orange for contrast */
+  --light: #00446633; /* Translucent deep blue for subtle backgrounds */
+  --secondary: #0078b3; /* Bright blue from the logo's highlights */
+  --darksecondary: #005f8a; /* Darker blue for depth */
+  --dark: #0f1e30; /* Dark background shade */
+  --black: #000000; /* Pure black */
+  --white: #ffffff; /* Pure white */
 }
