@@ -31,7 +31,7 @@ const Login = () => {
     setIsProcessing(true);
     await login(data).then((res) => {
       if (res?.status === 200) {
-        localStorage.setItem("admin_token", res?.data?.token);
+        localStorage.setItem("user_token", res?.data?.token);
         localStorage.setItem(
           "admin_data",
           JSON.stringify(res?.data?.user)

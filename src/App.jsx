@@ -16,9 +16,23 @@ const LoginPage1 = lazy(() => import('./components/auth/login'));
 const Dashboard = lazy(() => import('./components/pages/dashboard'));
 
 function App() {
+  const pathname = useLocation()
   const [toggled, setToggled] = useState(false);
   const [broken, setBroken] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+
+
+  const token = window.localStorage.getItem('user_token')
+
+  useEffect(() => {
+    global.BASEURL = 'https://api.binsapp.ai/'
+    global.TOKEN = token
+  }, [token])
+
+  useEffect(() => {
+    const isLoginData = JSON.parse(localStorage.getItem("isLogin_admin") || false);
+    setIsLogin(isLoginData);
+  }, [pathname]);
 
   function ScrollToTop() {
     const { pathname } = useLocation();
@@ -36,7 +50,7 @@ function App() {
         <Suspense fallback={
           <main className='h-screen flex flex-col justify-center items-center'>
             <CircularProgress className='text_primary' size={40} thickness={2} />
-            <img style={{ width: '3rem', height: "auto" }} src={student} className='absolute' alt="" />
+            <img style={{ width: '3rem', height: "auto" }} src={student} className='absolute rounded-full' alt="" />
           </main>
         }>
           <ScrollToTop />
