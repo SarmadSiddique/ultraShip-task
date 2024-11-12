@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { CircularProgress } from "@mui/material";
-import "bootstrap/dist/js/bootstrap.bundle";
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.scss';

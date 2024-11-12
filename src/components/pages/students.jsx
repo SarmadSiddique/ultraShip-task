@@ -16,7 +16,6 @@ const Students = () => {
   const [isModal, setIsModal] = useState(false);
 
   const handleButtonClick = (e) => {
-    message.info('This functionality is currently unavailable, but I can implement it for you if needed.');
     console.log('click left button', e);
   };
   const handleMenuClick = (e, card) => {
@@ -28,7 +27,7 @@ const Students = () => {
 
 
     } else {
-      message.info('This functionality is not working right now but if you need i will implement it');
+      message.info('This functionality is currently unavailable, but I can implement it for you if needed.');
 
     }
   };
@@ -137,13 +136,13 @@ const Students = () => {
         {icon}
         <div className='flex gap-3'>
           {
-            isModal && (
+            label ? (
 
               <p className=" text-[14px] plusJakara_bold  text-gray-800 text-nowrap m-0 gap-2">{label}</p>
-            )
+            ) : ''
           }
 
-          <p className="text-base text-[13px] text-gray-800 text-nowrap m-0 gap-2">{value}</p>
+          <p className="text-base text-[12px] text-gray-800 text-nowrap m-0 gap-2">{value}</p>
         </div>
       </div>
     )
@@ -168,11 +167,11 @@ const Students = () => {
             {students?.map((card, index) => (
               <div className="flex items-center justify-center" key={index}>
                 <div
-                  className={`bg-white bg-opacity-20 backdrop-blur-lg px-2 rounded-xl shadow-lg p-1 max-w-md w-full transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  className={`bg-white bg-opacity-20 backdrop-blur-lg px-3 py-2 rounded-xl shadow-lg  max-w-md w-full transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 >
                   <div className="flex justify-between">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-sm font-bold text-gray-800">{card.name}</h2>
+                      <h2 className="text-[16px] font-bold text-gray-800">{card.name}</h2>
                       <span className="px-2 text-[12px] font-semibold text-green-800 bg-green-200 rounded-full">
                         {card.status}
                       </span>
@@ -189,11 +188,14 @@ const Students = () => {
                     </Space>
                   </div>
 
-                  <div className="flex flex-row md:flex-nowrap sm:flex-wrap flex-wrap gap-2 mb-1">
-                    <InfoItem icon={<User className="w-5 h-5 text-orange-500" />} label="Gender" value={card.gender} />
-                    <InfoItem icon={<Phone className="w-5 h-5 text-green-500" />} label="Phone" value={card.phone} />
-                    <InfoItem icon={<MapPin className="w-5 h-5 text-red-500" />} label="Address" value={card.address} />
-                  </div>
+                  <div className="flex flex-row md:flex-nowrap flex-wrap gap-3 mb-1">
+                    <InfoItem icon={<User className="w-5 h-5 text-orange-500" />} value={card.gender} />
+                    <InfoItem icon={<Phone className="w-5 h-5 text-green-500" />} value={card.phone} />
+                    <InfoItem
+                      icon={<Calendar className="w-5 h-5 text-purple-500" />}
+
+                      value={new Date(card.dateOfBirth).toLocaleDateString()}
+                    />                  </div>
 
                   <div className="border-t border-gray-200">
                     <p className="text-xs mb-0 py-1 text-end text-gray-500">

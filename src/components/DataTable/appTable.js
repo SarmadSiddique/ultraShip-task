@@ -17,11 +17,6 @@ import {
   searchnormal
 } from "../icons/icon";
 
-// const BootstrapCheckbox = forwardRef((props, ref) => (
-//     <div className='form-check'>
-//         <Input type='checkbox' ref={ref} {...props} />
-//     </div>
-// ))
 
 const AppTable = ({
   data,
@@ -183,7 +178,7 @@ const AppTable = ({
                 noHeader
                 pagination
                 selectableRowsNoSelectAll
-                // selectableRows
+                
                 columns={columns}
                 paginationPerPage={10}
                 className="react-dataTable"
@@ -191,7 +186,6 @@ const AppTable = ({
                 paginationDefaultPage={currentPage + 1}
                 paginationComponent={CustomPagination}
                 data={searchValue.length ? filteredData : data}
-              // selectableRowsComponent={BootstrapCheckbox}
               />
             </div>
           )}
