@@ -3,7 +3,7 @@ import { useAuth } from './useAuth'
 
 function PublicRoutes() {
     const token = useAuth()
-    return token ? <Navigate to='/login' /> : <Outlet />
+    return token ? <Navigate to='/students' /> : <Outlet />
 }
 
 export default PublicRoutes;

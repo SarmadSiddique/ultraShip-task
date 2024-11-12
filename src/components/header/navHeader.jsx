@@ -8,9 +8,9 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
   const admindata = JSON.parse(window.localStorage.getItem("admin_data"));
   const navigate = useNavigate();
   const handleLogout = () => {
-    window.localStorage.removeItem("isLogin_admin");
+    window.localStorage.removeItem("isLogin_admin", false);
     message.success("Logout Successful!");
-    navigate("/login");
+    navigate("/");
   };
   const menuItems = [
     { label: "Students", path: "/students" },
