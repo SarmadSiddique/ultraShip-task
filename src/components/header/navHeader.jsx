@@ -4,32 +4,28 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { avatar1, student } from "../icons/icon";
-
 const NavHeader = ({ broken, setToggled, toggled }) => {
   const admindata = JSON.parse(window.localStorage.getItem("admin_data"));
   const navigate = useNavigate();
-
   const handleLogout = () => {
     window.localStorage.removeItem("isLogin_admin");
     message.success("Logout Successful!");
     navigate("/login");
   };
-
   const menuItems = [
     { label: "Students", path: "/students" },
     { label: "Features", path: "/students" },
     { label: "Pricing", path: "/pricing" },
   ];
-
   return (
     <main className="lg:container mx-auto">
 
       <nav
         style={{ position: "fixed", top: 0, zIndex: "999", backgroundColor: "rgba(0, 0, 0, 0)" }}
 
-        className=" text px-4 sticky-top py-3 w-full lg:container mx-auto ">
+        className=" text px-12 sticky-top py-3 w-full lg:container mx-auto ">
         <div className=" flex justify-between items-center">
-          <a href="/students" className="text-yellow-700 plusJakara_medium no-underline font-bold">
+          <a href="/students" className="text_primary plusJakara_medium no-underline font-bold">
             <img src={student} width="40px" className="rounded-full" alt="" />
           </a>
           <div className="flex items-center">
@@ -47,7 +43,7 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
                 <a
                   key={index}
                   href={item.path}
-                  className="text-yellow-700 no-underline plusJakara_medium  "
+                  className="text_primary no-underline plusJakara_medium  "
                 >
                   {item.label}
                 </a>
@@ -65,7 +61,7 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
 
         {/* Mobile dropdown menu */}
         {toggled && (
-          <div className="lg:hidden mt-2 space-y-2 bg-primary lg:px-4 py-2">
+          <div className="lg:hidden mt-2 space-y-2 bg_primary text_white rounded-md px-5 lg:px-4 py-2">
             {menuItems.map((item, index) => (
               <a
                 key={index}

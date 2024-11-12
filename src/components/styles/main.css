@@ -893,3 +893,6 @@
 .css-46bh2p-MuiCardContent-root:last-child {
   padding-bottom: 10px !important;
 }
+.relative:hover .group-hover:block {
+    display: block;
+  }

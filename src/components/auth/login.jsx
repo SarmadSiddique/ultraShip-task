@@ -52,11 +52,11 @@ const Login = () => {
 
   return (
     <>
-      <div className="w-full h-screen overflow-hidden flex flex-row">
-        <div className="d-none bg_primary d-md-flex justify-content-center align-items-center p-5 w-full lg:w-1/2">
+      <div className="w-screen h-screen overflow-hidden flex flex-row">
+        <div className="d-none bg_primary flex justify-center items-center p-5 w-full lg:w-1/2">
           <img className="rounded-full " width="200px" src={student} alt="ImageNotfound" />
         </div>
-        <div className="w-full lg:w-1/2 h-full overflow-y-scroll justify-center items-center p-4">
+        <div className="w-full lg:w-1/2 h-full  justify-center items-center p-4">
           <div className="flex flex-col items-center justify-center" style={{ minHeight: '90vh' }}>
 
             <div className=" border-0 p-xl-4">

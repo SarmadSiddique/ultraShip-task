@@ -14,7 +14,6 @@ const Students = () => {
   const [selectedStudent, setSelectedStudent] = useState(null)
   const [students, setStudents] = useState();
   const [isModal, setIsModal] = useState(false);
-
   const handleButtonClick = (e) => {
     console.log('click left button', e);
   };
@@ -153,11 +152,10 @@ const Students = () => {
     >
       <main className="lg:container  sm:px-12 px-4 py-4 mx-auto  bg-gradient-to-br from-purple-100 to-blue-200" style={{ minHeight: '100vh' }}>
         <div className="flex items-center mb-3 gap-3 mt-16 mx-2">
-          <h5 className="plusJakara_semibold text_dark">All Students</h5>
+          <h5 className="plusJakara_semibold text-lg text_dark">All Students</h5>
         </div>
         {loading ? (
           <div className="wrapper">
-            {/* Render skeleton for each card while loading */}
             {[...Array(5)].map((_, index) => (
               <StudentCardSkeleton key={index} />
             ))}
@@ -167,7 +165,7 @@ const Students = () => {
             {students?.map((card, index) => (
               <div className="flex items-center justify-center" key={index}>
                 <div
-                  className={`bg-white bg-opacity-20 backdrop-blur-lg px-3 py-2 rounded-xl shadow-lg  max-w-md w-full transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  className={`bg-[#ffff] bg-opacity-20 backdrop-blur-lg px-3 py-2 rounded-xl shadow-lg  max-w-md w-full transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 >
                   <div className="flex justify-between">
                     <div className="flex items-baseline gap-2">
@@ -188,7 +186,7 @@ const Students = () => {
                     </Space>
                   </div>
 
-                  <div className="flex flex-row md:flex-nowrap flex-wrap gap-3 mb-1">
+                  <div className="flex flex-row md:flex-nowrap flex-wrap gap-3 mb-1 py-2">
                     <InfoItem icon={<User className="w-5 h-5 text-orange-500" />} value={card.gender} />
                     <InfoItem icon={<Phone className="w-5 h-5 text-green-500" />} value={card.phone} />
                     <InfoItem
