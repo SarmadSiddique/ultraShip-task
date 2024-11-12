@@ -54,8 +54,8 @@ const Login = () => {
   return (
     <>
       <div className="w-screen h-screen overflow-hidden flex flex-row">
-        <div className="d-none bg_primary flex justify-center items-center p-5 w-full lg:w-1/2">
-          <img className="rounded-full " width="200px" src={student} alt="ImageNotfound" />
+        <div className="hidden lg:flex bg_primary justify-center items-center p-5 w-full lg:w-1/2">
+          <img className="rounded-full" width="200px" src={student} alt="ImageNotfound" />
         </div>
         <div className="w-full lg:w-1/2 h-full  justify-center items-center p-4">
           <div className="flex flex-col items-center justify-center" style={{ minHeight: '90vh' }}>
@@ -113,7 +113,6 @@ const Login = () => {
                     </div>
                   </div>
                 </Form.Item>
-                {/* <button type='button' className="my-[18px] md:my-[24px] text-sm text-[#0E73F6] inter_semibold">Forgot Password?</button> */}
                 <div className="w-full my-4">
                   {!isProcessing ? (
                     <button
