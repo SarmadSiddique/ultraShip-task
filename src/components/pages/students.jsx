@@ -1,35 +1,25 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { Dropdown, message, Space } from 'antd';
+import { message } from 'antd';
 import { Calendar, Eye, GraduationCap, Hash, Mail, MapPin, Phone, Trash2, User, X } from 'lucide-react';
 import React, { useEffect, useState } from "react";
 import { Edit2 } from 'react-feather';
+import { FaEllipsisH } from 'react-icons/fa';
 import { StyleSheetManager } from "styled-components";
 import axiosInstanceStudent from "../../utils/axiosInstanceStudent";
 import StudentCardSkeleton from "../common/studentCardSkeleton";
 const Students = () => {
+  const [isOpen, setIsOpen] = useState(null);
+  const toggleMenu = (index) => {
+    setIsOpen(isOpen === index ? null : index);
+  };
   const [isVisible, setIsVisible] = useState(true)
   const [loading, setLoading] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null)
   const [students, setStudents] = useState();
   const [isModal, setIsModal] = useState(false);
-  const handleButtonClick = (e) => {
-    console.log('click left button', e);
-  };
-  const handleMenuClick = (e, card) => {
-    console.log(card, "card")
-    console.log(e)
-    if (e === '3') {
-      setSelectedStudent(card)
-      setIsModal(true)
 
-
-    } else {
-      message.info('This functionality is currently unavailable, but I can implement it for you if needed.');
-
-    }
-  };
 
   const StudentPreview = ({ student, onClose }) => (
 
@@ -78,12 +68,13 @@ const Students = () => {
             label="Date of Birth"
             value={new Date(student.dateOfBirth).toLocaleDateString()}
           />
-          <div className="border-t flex justify-between flex-wrap border-gray-200 pt-2 mt-2 space-y-2">
-            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500 m-0`}>
-              <span className="font-medium">Created:</span> {new Date(student.createdAt).toLocaleString()}
+          <div className="border-t flex  items-center justify-between    flex-wrap border-gray-200">
+            <p className={`${isModal ? 'text-[14px] m-0 mt-2' : 'text-[13px]'} text-gray-500 m-0 mt-2`}>
+              <span className="plusJakara_medium">Created:</span> {new Date(student.createdAt).toLocaleString()}
             </p>
-            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500 m-0`}>
-              <span className="font-medium">Last Updated:</span> {new Date(student.updatedAt).toLocaleString()}
+
+            <p className={`${isModal ? 'text-[14px] m-0 mt-2' : 'text-[13px]'} text-gray-500 m-0 mt-2`}>
+              <span className="plusJakara_medium">Last Updated:</span> {new Date(student.updatedAt).toLocaleString()}
             </p>
 
           </div>
@@ -91,25 +82,39 @@ const Students = () => {
       </div>
     </div>
   )
+  const handleEdit = () => {
+    setIsOpen(null)
+    message.info('This functionality is currently unavailable, but I can implement it for you if needed.');
+  };
 
+  const handleDelete = () => {
+    setIsOpen(null)
+    message.info('This functionality is currently unavailable, but I can implement it for you if needed.');
 
-  const items = [
+  };
+
+  const handlePreview = (card) => {
+    console.log('Preview clicked');
+    setSelectedStudent(card)
+    setIsModal(true)
+    setIsOpen(null)
+  };
+  const actions = [
     {
       label: 'Edit',
-      key: '1',
       icon: <Edit2 size={16} />,
-    },
-    {
-      label: 'Delete',
-      key: '2',
-      icon: <Trash2 size={16} />,
+      onClick: handleEdit,
     },
     {
       label: 'Preview',
-      key: '3',
       icon: <Eye size={16} />,
+      onClick: (card) => handlePreview(card),
     },
-
+    {
+      label: 'Delete',
+      icon: <Trash2 size={16} />,
+      onClick: handleDelete,
+    }
   ];
 
 
@@ -146,6 +151,8 @@ const Students = () => {
       </div>
     )
   }
+
+
   return (
     <StyleSheetManager
       shouldForwardProp={(prop) => !["sortActive"].includes(prop)}
@@ -175,7 +182,38 @@ const Students = () => {
                       </span>
                     </div>
 
-                    <Space wrap>
+                    <div className="flex justify-center items-center">
+                      <div
+                        className="relative"
+                      >
+                        <button
+                          className="text-xl cursor-pointer p-2 rounded-full hover:bg-gray-200"
+                          onClick={() => toggleMenu(index)}
+                        >
+                          <FaEllipsisH style={{ color: '#ffae4d' }} />
+                        </button>
+
+                        {(isOpen === index || null) && (
+                          <div className="absolute right-0 top-7  mt-2 h-[80px]  bg-white text-black rounded-md shadow-lg">
+                            <div className="flex flex-col gap-1">
+                              {actions.map((action, index) => (
+                                <button
+                                  key={index}
+                                  onClick={() => action.onClick(card)}  // Use card if needed, or remove if not required
+                                  className={index === 1 ? 'w-full px-4 py-1 text-left text-sm hover:bg-[#0f1e30] hover:text-white' : "w-full px-4  text-left text-sm hover:bg-[#0f1e30] hover:text-white"}
+                                >
+                                  <div className="flex justify-center items-center gap-3">
+                                    <p className="m-0 text-[14px]">{action.label}</p>
+                                    {action.icon}
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {/* <Space wrap>
                       <Dropdown.Button
                         menu={{
                           items,
@@ -183,7 +221,7 @@ const Students = () => {
                         }}
                         onClick={handleButtonClick}
                       />
-                    </Space>
+                    </Space> */}
                   </div>
 
                   <div className="flex flex-row md:flex-nowrap flex-wrap gap-3 mb-1 py-2">

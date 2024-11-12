@@ -21,6 +21,7 @@ function App() {
   }, [token])
   useEffect(() => {
     const isLoginData = JSON.parse(localStorage.getItem("isLogin_admin") || false);
+    setToggled(true)
     setIsLogin(isLoginData);
   }, [pathname]);
 
@@ -47,8 +48,8 @@ function App() {
             <Route path='/login' element={<LoginPage1 />}></Route>
           </Route>
           <Route element={<PrivateRoutes />}>
-
             <Route path="/students" element={<Students />} />
+
           </Route>
         </Routes>
       </Suspense>

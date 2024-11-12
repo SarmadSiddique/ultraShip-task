@@ -22,13 +22,13 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleSubmit = async (value) => {
+  const handleSubmit = (value) => {
     const data = {
       email: value?.email,
       password: value?.password
     };
     setIsProcessing(true);
-    await login(data).then((res) => {
+    login(data).then((res) => {
       if (res?.status === 200) {
         localStorage.setItem("user_token", res?.data?.token);
         localStorage.setItem(
@@ -36,6 +36,7 @@ const Login = () => {
           JSON.stringify(res?.data?.user)
         );
         localStorage.setItem("isLogin_admin", true);
+
         navigate("/students");
         message.success("Login Successfully");
         setIsProcessing(false);
