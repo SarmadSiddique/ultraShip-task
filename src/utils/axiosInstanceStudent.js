@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+const apiUrl = " https://ultra-backend-v50e.onrender.com/";
 export const axiosInstanceStudent = axios.create({
-    baseURL: 'https://ultra-backend-v50e.onrender.com/',
+    baseURL: apiUrl,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -15,9 +15,11 @@ axiosInstanceStudent.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = 'Bearer ' + token;
         }
+
         return config;
     },
     (error) => {
+        console.error('Request Error:', error);
         return Promise.reject(error);
     }
 );
@@ -26,8 +28,10 @@ axiosInstanceStudent.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.error('API Error:', error.response || error.message);
+        const errorMessage = error.response?.data?.message || error.message;
+        console.error('API Error:', errorMessage);
         return Promise.reject(error);
     }
 );
+
 export default axiosInstanceStudent;

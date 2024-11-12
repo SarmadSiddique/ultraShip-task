@@ -1,18 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Menu, Transition } from "@headlessui/react";
 import { message } from "antd";
-import React, { Fragment, useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
-import { IoIosArrowDown } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  avatar1,
-  avatar3
-} from "../icons/icon";
+import { avatar1, student } from "../icons/icon";
 
 const NavHeader = ({ broken, setToggled, toggled }) => {
-  const admindata = JSON.parse(window.localStorage.getItem('admin_data'))
+  const admindata = JSON.parse(window.localStorage.getItem("admin_data"));
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -21,77 +15,79 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
     navigate("/login");
   };
 
+  const menuItems = [
+    { label: "Students", path: "/students" },
+    { label: "Features", path: "/students" },
+    { label: "Pricing", path: "/pricing" },
+  ];
+
   return (
-    <>
-      <Navbar
-        bg="white"
-        // style={{ backgroundColor: '#0EBE3C' }}
-        expand="lg"
-        sticky="top"
-        className="p-3 shadow-sm w-[100%]"
-        id="navbar"
-      >
-        <Container fluid="lg" className="w-full">
-          <div className="flex items-center gap-3 md:w-1/2">
-            {broken && (
-              <button
-                className="sb-button"
-                onClick={() => setToggled(!toggled)}
-              >
-                <MdMenu size={28} />
-              </button>
-            )}
-            {/* <h3 className="d-none d-md-block poppins_medium mb-0 text_dark"></h3> */}
-          </div>
-          <Nav className="ms-auto flex">
-            <div className="flex justify-center items-center">
-              <Menu as="div" className="relative">
-                <Menu.Button className="relative flex items-center me-3 no-underline gap-2">
-                  <img className="rounded-full" src={admindata?.profilePicture || avatar1} width="40px" alt="" />
-                  <div className="d-flex flex-column align-items-start justify-content-start me-4">
-                    <span style={{ fontSize: '12px' }} className="text_secondary plusJakara_medium">User</span>
-                  </div>
-                  <IoIosArrowDown style={{ color: '#000' }} />
-                </Menu.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
+    <main className="lg:container mx-auto">
+
+      <nav
+        style={{ position: "fixed", top: 0, zIndex: "999", backgroundColor: "rgba(0, 0, 0, 0)" }}
+
+        className=" text px-4 sticky-top py-3 w-full lg:container mx-auto ">
+        <div className=" flex justify-between items-center">
+          <a href="/students" className="text-yellow-700 plusJakara_medium no-underline font-bold">
+            <img src={student} width="40px" className="rounded-full" alt="" />
+          </a>
+          <div className="flex items-center">
+            {/* Toggler button for mobile */}
+            <button
+              className="lg:hidden text-white text-end"
+              onClick={() => setToggled(!toggled)}
+            >
+              <MdMenu size={28} />
+            </button>
+
+            {/* Desktop menu */}
+            <div className="hidden lg:flex items-center space-x-4">
+              {menuItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.path}
+                  className="text-yellow-700 no-underline plusJakara_medium  "
                 >
-                  <Menu.Items
-                    className="absolute z-10 mt-4 flex flex-col shadow-sm bg_white rounded-3 py-2"
-                    style={{
-                      minWidth: "10rem",
-                      right: "0px",
-                    }}
-                  >
-                    {/* <Link
-                      // to='profile'
-                      // onClick={handleLogout}
-                      style={{ textDecoration: "none" }}
-                      className="px-4 py-2 plusJakara_semibold sub_grid_dashboard2 text_dark no-underline"
-                    >
-                      Setting
-                    </Link> */}
-                    <Link
-                      onClick={handleLogout}
-                      style={{ textDecoration: "none" }}
-                      className="px-4 py-2 plusJakara_semibold sub_grid_dashboard2 text_dark no-underline"
-                    >
-                      Sign out
-                    </Link>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
+                  {item.label}
+                </a>
+              ))}
+              <div className="flex items-center lg:ml-4">
+                <img
+                  src={admindata?.profilePicture || avatar1}
+                  alt="Profile"
+                  className="rounded-full w-10 h-10"
+                />
+              </div>
             </div>
-          </Nav>
-        </Container>
-      </Navbar>
-    </>
+          </div>
+        </div>
+
+        {/* Mobile dropdown menu */}
+        {toggled && (
+          <div className="lg:hidden mt-2 space-y-2 bg-primary lg:px-4 py-2">
+            {menuItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.path}
+                className="block text-white no-underline "
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className="flex items-center lg:ml-4">
+              <img
+                onClick={handleLogout}
+
+                src={admindata?.profilePicture || avatar1}
+                alt="Profile"
+                className="rounded-full w-10 h-10"
+              />
+            </div>
+          </div>
+        )}
+      </nav>
+    </main>
   );
 };
 

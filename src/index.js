@@ -10,11 +10,10 @@ import { store } from './components/redux/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 const App = lazy(() => import('./App'))
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Suspense fallback={
-    <main className='h-screen flex flex-col justify-center items-center'>
+    <main className='h-screen flex flex-col justify-center items-center bg-gradient-to-br from-purple-100 to-blue-200'>
       <CircularProgress className='text_primary' size={40} thickness={2} />
     </main>
   }>

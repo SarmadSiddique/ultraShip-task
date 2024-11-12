@@ -190,11 +190,9 @@
   background: #18173c;
 }
 
-
 .address_google:focus {
   outline: none !important;
 }
-
 
 .border_color_circle {
   border-radius: 50%;
@@ -476,7 +474,7 @@
   }
 } */
 
-.apexcharts-toolbar{
+.apexcharts-toolbar {
   display: none !important;
 }
 
@@ -620,7 +618,6 @@
 @media (max-width: 1392px) {
   .gridDashboard4 {
     grid-template-columns: 1fr;
-
   }
 }
 
@@ -636,11 +633,11 @@
     gap: 20px;
   }
 }
-.sub_grid_dashboard2:hover{
+.sub_grid_dashboard2:hover {
   background-color: #f4f4f4;
 }
 
-.css-ak8x0a{
+.css-ak8x0a {
   border-right: none !important;
 }
 
@@ -812,20 +809,70 @@
   cursor: pointer;
 }
 
-.radius20{
+.radius20 {
   border-radius: 20px;
 }
-
 
 /* .css-vj11vy.ps-menu-root{
   padding: 0px !important;
 } */
 
-
-.form_data .form-control:focus{
+.form_data .form-control:focus {
   box-shadow: none !important;
 }
 
-.form_data .form-select:focus{
+.form_data .form-select:focus {
   box-shadow: none !important;
+}
+.borderclasses {
+  border: 1px solid var(--darksecondary);
+  /* min-width: 300px;
+  width: 100%; */
+}
+@media screen and (max-width: 420px) {
+  .borderclasses {
+    border: 1px solid var(--darksecondary);
+    /* width: auto !important; */
+  }
+}
+.font_custom {
+  font-weight: bold !important;
+}
+.width_card {
+  /* max-width: 600px; */
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  justify-content: center;
+}
+
+@media screen and (max-width: 1260px) {
+  .wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .wrapper {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0rem;
+  }
+}
+
+:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item {
+  border: none !important;
+  color: black !important;
+}
+:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+    .ant-btn-compact-last-item
+  ).ant-btn-compact-first-item {
+  display: none !important;
+}
+.css-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 10px !important;
 }

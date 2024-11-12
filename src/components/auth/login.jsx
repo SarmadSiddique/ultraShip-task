@@ -2,7 +2,6 @@
 import { CircularProgress } from "@mui/material";
 import { Form, Input, message } from "antd";
 import React, { useState } from "react";
-import { } from "react-bootstrap";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
@@ -37,7 +36,7 @@ const Login = () => {
           JSON.stringify(res?.data?.user)
         );
         localStorage.setItem("isLogin_admin", true);
-        navigate("/dashboard");
+        navigate("/students");
         message.success("Login Successfully");
         setIsProcessing(false);
       }
@@ -60,7 +59,7 @@ const Login = () => {
         <div className="w-full lg:w-1/2 h-full overflow-y-scroll justify-center items-center p-4">
           <div className="flex flex-col items-center justify-center" style={{ minHeight: '90vh' }}>
 
-            <div className="border border-white p-xl-4">
+            <div className=" border-0 p-xl-4">
               <h2 className="inter_semibold text-xl mb-0 md:mb-auto md:text-2xl lg:text-3xl text_black">
                 Login
               </h2>
