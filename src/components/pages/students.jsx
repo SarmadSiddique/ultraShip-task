@@ -36,8 +36,8 @@ const Students = () => {
   const StudentPreview = ({ student, onClose }) => (
 
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-white rounded-lg shadow-xl p-4 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="flex justify-between items-center mb-2">
           <h2 className="text-2xl font-bold text-gray-800">{student.name}</h2>
           <button
             onClick={onClose}
@@ -80,11 +80,11 @@ const Students = () => {
             label="Date of Birth"
             value={new Date(student.dateOfBirth).toLocaleDateString()}
           />
-          <div className="border-t border-gray-200 pt-4 mt-4 space-y-2">
-            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500`}>
+          <div className="border-t flex justify-between flex-wrap border-gray-200 pt-2 mt-2 space-y-2">
+            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500 m-0`}>
               <span className="font-medium">Created:</span> {new Date(student.createdAt).toLocaleString()}
             </p>
-            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500`}>
+            <p className={`${isModal ? 'text-[14px]' : 'text-[13px]'} text-gray-500 m-0`}>
               <span className="font-medium">Last Updated:</span> {new Date(student.updatedAt).toLocaleString()}
             </p>
 
@@ -135,7 +135,14 @@ const Students = () => {
     return (
       <div className="flex items-center md:flex-nowrap sm:flex-wrap gap-2">
         {icon}
-        <div>
+        <div className='flex gap-3'>
+          {
+            isModal && (
+
+              <p className=" text-[14px] plusJakara_bold  text-gray-800 text-nowrap m-0 gap-2">{label}</p>
+            )
+          }
+
           <p className="text-base text-[13px] text-gray-800 text-nowrap m-0 gap-2">{value}</p>
         </div>
       </div>
@@ -182,7 +189,7 @@ const Students = () => {
                     </Space>
                   </div>
 
-                  <div className="flex flex-row md:flex-nowrap flex-wrap gap-2 mb-1">
+                  <div className="flex flex-row md:flex-nowrap sm:flex-wrap flex-wrap gap-2 mb-1">
                     <InfoItem icon={<User className="w-5 h-5 text-orange-500" />} label="Gender" value={card.gender} />
                     <InfoItem icon={<Phone className="w-5 h-5 text-green-500" />} label="Phone" value={card.phone} />
                     <InfoItem icon={<MapPin className="w-5 h-5 text-red-500" />} label="Address" value={card.address} />

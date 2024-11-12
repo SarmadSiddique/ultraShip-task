@@ -862,17 +862,34 @@
   }
 }
 
-:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
-    .ant-btn-compact-first-item
-  ).ant-btn-compact-last-item {
+:where(.css-dev-only-do-not-override-i46qwz)
+  .ant-btn-compact-item:not(.ant-btn-compact-first-item):not(
+    .ant-btn-compact-last-item
+  ) {
   border: none !important;
   color: black !important;
 }
-:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+
+:where(.css-dev-only-do-not-override-i46qwz)
+  .ant-btn-compact-item.ant-btn-compact-first-item:not(
     .ant-btn-compact-last-item
-  ).ant-btn-compact-first-item {
+  ) {
   display: none !important;
 }
+:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item,
+:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item.ant-btn-sm,
+:where(.css-dev-only-do-not-override-i46qwz).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item.ant-btn-lg {
+  border: none !important;
+  border-radius: none !important;
+  box-shadow: none !important;
+}
+
 .css-46bh2p-MuiCardContent-root:last-child {
   padding-bottom: 10px !important;
 }
