@@ -8,8 +8,6 @@ import { login } from "../api/auth";
 import {
   eye,
   eyeoff,
-  luxurelogolight,
-  recyclebin,
   student
 } from "../icons/icon";
 // import { apiRequest } from '../../api/auth_api'

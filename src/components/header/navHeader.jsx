@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { message } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { avatar1, student } from "../icons/icon";
@@ -17,6 +17,9 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
     { label: "Features", path: "/students" },
     { label: "Pricing", path: "/students" },
   ];
+  useEffect(() => {
+    setToggled(false)
+  }, [])
   return (
     <main className="lg:container mx-auto">
 
@@ -27,7 +30,7 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
           zIndex: "999",
           backgroundColor: "rgba(0, 0, 0, 0)"
         }}
-        className="text px-14 sticky-top py-3 w-full lg:container mx-auto"
+        className="text sm:px-14 px-4 sticky-top py-3 w-full lg:container mx-auto"
       >
         <div className="flex justify-between items-center">
           <a href="/students" className="text_primary plusJakara_medium no-underline font-bold">
@@ -76,13 +79,13 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
         {toggled && (
           <div className="lg:hidden mt-2 space-y-2 bg_primary text_white rounded-md px-5 lg:px-4 py-2">
             {menuItems.map((item, index) => (
-              <a
+              <Link
                 key={index}
-                href={item.path}
+                to={item.path}
                 className="block text-white no-underline"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <div className="flex items-center lg:ml-4">
               <img
