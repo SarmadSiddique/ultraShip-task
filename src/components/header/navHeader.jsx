@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { avatar1, student } from "../icons/icon";
 const NavHeader = ({ setToggled, toggled }) => {
+  const [scrolled, setScrolled] = useState(false);
   const admindata = JSON.parse(window.localStorage.getItem("admin_data"));
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -17,7 +18,14 @@ const NavHeader = ({ setToggled, toggled }) => {
     { label: "Features", path: "/students" },
     { label: "Pricing", path: "/students" },
   ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <main className="lg:container mx-auto">
 
@@ -26,7 +34,9 @@ const NavHeader = ({ setToggled, toggled }) => {
           position: "fixed",
           top: 0,
           zIndex: "999",
-          backgroundColor: "rgba(0, 0, 0, 0)"
+          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+          backgroundColor: scrolled ? "#0f1e30" : "rgba(0, 0, 0, 0)",
+          boxShadow: scrolled ? "0px 4px 12px rgba(0, 0, 0, 0.2)" : "none",
         }}
         className="text sm:px-14 px-4 sticky-top py-3 w-full lg:container mx-auto"
       >
@@ -47,7 +57,7 @@ const NavHeader = ({ setToggled, toggled }) => {
                 <Link
                   key={index}
                   to={item.path}
-                  className="text_primary no-underline plusJakara_medium"
+                  className={scrolled ? 'text-white no-underline plusJakara_medium' : "text_primary no-underline plusJakara_medium"}
                 >
                   {item.label}
                 </Link>
