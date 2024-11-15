@@ -21,7 +21,6 @@ function App() {
   }, [token])
   useEffect(() => {
     const isLoginData = JSON.parse(localStorage.getItem("isLogin_admin") || false);
-    setToggled(true)
     setIsLogin(isLoginData);
   }, [pathname]);
 

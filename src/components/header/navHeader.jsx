@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { avatar1, student } from "../icons/icon";
-const NavHeader = ({ broken, setToggled, toggled }) => {
+const NavHeader = ({ setToggled, toggled }) => {
   const admindata = JSON.parse(window.localStorage.getItem("admin_data"));
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -17,9 +17,7 @@ const NavHeader = ({ broken, setToggled, toggled }) => {
     { label: "Features", path: "/students" },
     { label: "Pricing", path: "/students" },
   ];
-  useEffect(() => {
-    setToggled(false)
-  }, [])
+
   return (
     <main className="lg:container mx-auto">
 
